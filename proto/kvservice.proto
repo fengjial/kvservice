@@ -1,0 +1,31 @@
+package kvservice;
+option cc_generic_services = true;
+
+message GetRequest {
+    required int64 key = 1;
+    optional string request_id = 2;
+}
+
+message PutRequest {
+    required int64 key = 1;
+    required string value = 2;
+    optional string request_id = 3;
+}
+
+message RemoveRequest {
+    required int64 key = 1;
+    optional string request_id = 2;
+}
+
+message CommonResponse {
+    required int32 code = 1;
+    required string messages =2;
+    optional string value = 3;
+    optional string request_id = 4;
+}
+
+service KVService {
+    rpc get(GetRequest) returns (CommonResponse);
+    rpc put(PutRequest) returns (CommonResponse);
+    rpc remove(RemoveRequest) returns (CommonResponse);
+}
